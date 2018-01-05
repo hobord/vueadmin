@@ -12,6 +12,11 @@ Vue.filter('formatDate', function (value, format) {
   }
 })
 
+//  RxJS
+import Rx from 'rxjs/Rx'
+import VueRx from 'vue-rx'
+Vue.use(VueRx, Rx)
+
 // Shared Data store
 import store from './store/index'
 import Vuex from 'vuex'

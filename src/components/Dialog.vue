@@ -1,5 +1,6 @@
 <template>
   <v-dialog v-model="isVisible" persistent>
+    div*3>span
     <v-card>
       <v-card-title class="headline" :class="classes">{{title}}</v-card-title>
       <v-card-text>{{content}}</v-card-text>
