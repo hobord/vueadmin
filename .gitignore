@@ -1,0 +1,6 @@
+.DS_Store
+node_modules/
+dist/
+publish
+package-lock.json
+npm-debug.log

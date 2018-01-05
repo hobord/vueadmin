@@ -1,0 +1,7 @@
+query hn($qty: Int) {
+  hn {
+    topStories(limit: $qty) {
+      title url
+    }
+  }
+}
