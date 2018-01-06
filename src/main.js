@@ -77,7 +77,7 @@ Vue.use(Vuetify)
 import App from './App'
 
 /* eslint-disable no-new */
-new Vue({
+window.app = new Vue({
   el: '#app',
   store,
   router,

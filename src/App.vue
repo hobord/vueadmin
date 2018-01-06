@@ -3,6 +3,8 @@
       <v-navigation-drawer
           v-if="loggedin"
           fixed
+          hide-overlay
+          :mini-variant.sync="mini"
           clipped
           app
           v-model="drawer">
@@ -15,7 +17,7 @@
             <v-list-tile-content>
               <v-list-tile-title>Admin</v-list-tile-title>
             </v-list-tile-content>
-            <v-list-tile-action @click.stop="drawer = !drawer">
+            <v-list-tile-action @click.stop="mini = !mini">
               <v-btn icon>
                 <v-icon>chevron_left</v-icon>
               </v-btn>
@@ -119,6 +121,7 @@
     data () {
       return {
         loggedin: false,
+        mini: false,
         drawer: null,
         breadcrumbs: []
       }
@@ -132,14 +135,9 @@
       }
     },
     mounted () {
-      var that = this
-      this.$eventbus.$on('AUTH_USER', function (payload) {
-        that.login(payload)
-      })
+      this.$eventbus.$on('APP.AUTH_USER', this.login)
+      this.$eventbus.$on('APP.LOGOUT_USER', this.logout)
 
-      this.$eventbus.$on('LOGOUT_USER', function () {
-        that.logout()
-      })
       // this.$store.dispatch('MenuStore/GET_MENU_ITEMS').then(()=>{})
 
       if (this.$router.history.current.meta.breadcrumbs) {

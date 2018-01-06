@@ -46,9 +46,9 @@
     watch: {
       loading: function (newLoading) {
         if (newLoading !== 0) {
-          this.$eventbus.$emit('SHOW_LOADER')
+          this.$eventbus.$emit('APP.SHOW_LOADER')
         } else {
-          this.$eventbus.$emit('HIDE_LOADER')
+          this.$eventbus.$emit('APP.HIDE_LOADER')
         }
       }
     },
@@ -65,7 +65,7 @@
         // Will update the 'loading' attribute
         // +1 when a new query is loading
         // -1 when a query is completed
-        loadingKey: 'loading',
+        loadingKey: 'loading'
         // Polling query
         // pollInterval: 2000 // ms
       }

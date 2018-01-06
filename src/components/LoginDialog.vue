@@ -6,9 +6,9 @@
       <v-card-title>
         <v-form style="width: 100%">
           <v-text-field
-            name="authUser.username"
-            v-model="authUser.username"
-            label="Username"
+            name="authUser.email"
+            v-model="authUser.email"
+            label="Email"
             required
             single-line
           ></v-text-field>
@@ -22,6 +22,12 @@
         </v-form>
       </v-card-title>
       <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn color=""
+          :disabled="loading"
+          @click.stop="forget()"
+          >Forget Password
+        </v-btn>
         <v-btn color="primary"
           :loading="loading"
           :disabled="loading"
@@ -41,7 +47,7 @@
         dlg: true,
         loading: false,
         authUser: {
-          username: null,
+          email: null,
           password: null
         }
       }
@@ -49,8 +55,8 @@
     methods: {
       login: function () {
         this.loading = true
-        this.$eventbus.$emit('AUTH_USER', {
-          username: this.authUser.username,
+        this.$eventbus.$emit('APP.AUTH_USER', {
+          email: this.authUser.email,
           content: this.authUser.password
         })
       }
