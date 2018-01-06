@@ -16,7 +16,7 @@ import { EventBus } from './eventBus'
 Vue.prototype.$eventbus = EventBus
 Vue.use(EventBus)
 
-//  RxJS
+// RxJS
 import Rx from 'rxjs/Rx'
 import VueRx from 'vue-rx'
 Vue.use(VueRx, Rx)

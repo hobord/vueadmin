@@ -29,7 +29,7 @@
         color="pink"
         dark
         fixed
-        @click.stop="dialog = !dialog"
+        @click.native="addMessage()"
     >
       <v-icon>add</v-icon>
     </v-btn>
@@ -89,6 +89,7 @@
           subTitle: 'Amet eiusmod aliqua deserunt quis. ',
           text: 'Anim dolore veniam cillum pariatur veniam. Non magna officia elit consequat eiusmod tempor. Enim excepteur ad enim incididunt. Ad duis exercitation occaecat velit est ipsum. Ad magna magna ut aliquip duis. Ad dolor duis eiusmod qui fugiat ea laboris quis.'
         })
+        this.$eventbus.$emit('APP.SHOW_BOTTOM_MESSAGES')
       }
     }
   }
