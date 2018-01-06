@@ -1,13 +1,23 @@
 <template>
     <v-app id="app">
       <v-navigation-drawer
-          v-if="loggedin"
-          fixed
-          hide-overlay
-          :mini-variant.sync="mini"
-          clipped
-          app
-          v-model="drawer">
+        app
+        right
+        v-model="right"
+        fixed
+        hide-overlay
+        temporary
+        floating
+        v-if="loggedin"
+      ></v-navigation-drawer>
+      <v-navigation-drawer
+        v-if="loggedin"
+        fixed
+        hide-overlay
+        :mini-variant.sync="mini"
+        clipped
+        app
+        v-model="drawer">
         <v-list dense>
           <v-list-tile avatar tag="div">
             <v-list-tile-avatar>
@@ -70,11 +80,11 @@
 
       </v-navigation-drawer>
 
-
       <v-toolbar app class="indigo darken-4" dark v-if="loggedin">
         <v-toolbar-side-icon @click.native="drawer = !drawer" v-if="!drawer"></v-toolbar-side-icon>
-        <v-toolbar-title>Admin:</v-toolbar-title>
-        <v-breadcrumbs divider="/">
+        <v-toolbar-title  class="white--text">Admin:</v-toolbar-title>
+
+        <v-breadcrumbs divider="/" >
           <v-breadcrumbs-item
               v-for="item in breadcrumbs"
               :key="item.name"
@@ -83,12 +93,24 @@
             {{ item.name }}
           </v-breadcrumbs-item>
         </v-breadcrumbs>
-      </v-toolbar>
 
+        <v-spacer></v-spacer>
+        <v-btn icon @click.native="show_bottom_messages()">
+          <v-badge overlap transition="scale-transition" color='red'>
+            <span slot="badge" v-if="messageCounts>0">{{messageCounts}}</span>
+            <v-icon>inbox</v-icon>
+          </v-badge>
+        </v-btn>
+        <v-btn icon @click.native="right = !right">
+          <v-badge left color="red">
+            <span slot="badge" v-if="badge>0">{{badge}}</span>
+            <v-icon>more_vert</v-icon>
+          </v-badge>
+        </v-btn>
+      </v-toolbar>
 
       <v-content>
         <v-container fluid>
-
           <login-dialog v-if="!loggedin"></login-dialog>
 
           <transition  name="fade" mode="out-in">
@@ -97,7 +119,7 @@
 
         </v-container>
       </v-content>
-
+      <bottom-info-bar></bottom-info-bar>
       <toast></toast>
       <dialog-window></dialog-window>
       <full-loading-spinner></full-loading-spinner>
@@ -110,19 +132,23 @@
   import Toast from './components/Toast.vue'
   import DialogWindow from './components/Dialog.vue'
   import FullLoadingSpinner from './components/FullLoadingSpinner.vue'
+  import BottomInfoBar from './components/BottomInfoBar.vue'
 
   export default {
     components: {
       LoginDialog,
       DialogWindow,
       Toast,
-      FullLoadingSpinner
+      FullLoadingSpinner,
+      BottomInfoBar
     },
     data () {
       return {
         loggedin: false,
         mini: false,
         drawer: null,
+        right: false,
+        badge: 0,
         breadcrumbs: []
       }
     },
@@ -131,6 +157,11 @@
         get () {
           return []
           // return this.$store.getters['MenuStore/menuItems'](0)
+        }
+      },
+      messageCounts: {
+        get () {
+          return this.$store.getters['AppMessages/count']
         }
       }
     },
@@ -152,10 +183,14 @@
       })
     },
     methods: {
+      show_bottom_messages: function () {
+        this.$eventbus.$emit('APP.SHOW_BOTTOM_MESSAGES')
+      },
       login: function (auth) {
         setTimeout(() => {
           this.loggedin = true
-        }, 2000)
+          this.drawer = true
+        }, 1)
       },
       logout: function (event) {
         this.loggedin = false

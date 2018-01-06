@@ -3,12 +3,14 @@ import Vuex from 'vuex'
 // const util = require('util')
 const debug = process.env.NODE_ENV !== 'production'
 
-import ModuleNameStore from './module/module.js'
+import ModuleNameStore from './module/module'
+import AppMessages from './app_messages/app_messages'
 
 const store = () => new Vuex.Store({
 // export default  store = new Vuex.Store({
   modules: {
-    ModuleNameStore
+    ModuleNameStore,
+    AppMessages
   },
   state: {
     stateVar: 'example vuex store data'
