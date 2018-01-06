@@ -43,6 +43,15 @@
     data: () => ({
       loading: 0
     }),
+    watch: {
+      loading: function (newLoading) {
+        if (newLoading !== 0) {
+          this.$eventbus.$emit('SHOW_LOADER')
+        } else {
+          this.$eventbus.$emit('HIDE_LOADER')
+        }
+      }
+    },
     // Apollo GraphQL
     apollo: {
       // Local state 'posts' data will be updated
@@ -51,14 +60,14 @@
         // GraphQL query
         query: Query,
         variables: {
-          qty: 5
+          qty: 10
         },
         // Will update the 'loading' attribute
         // +1 when a new query is loading
         // -1 when a query is completed
-        loadingKey: 'loading'
+        loadingKey: 'loading',
         // Polling query
-        // pollInterval: 300, // ms
+        // pollInterval: 2000 // ms
       }
     },
     computed: {

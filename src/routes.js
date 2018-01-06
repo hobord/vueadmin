@@ -4,26 +4,23 @@ const ExampleComponent = resolve => {
   })
 }
 
-export let routes = [{
-  path: '/',
-  component: ExampleComponent,
-  name: 'home',
-  meta: {
-    breadcrumbs: [{ name: 'Home', path: '/' }]
+export let routes = [
+  {
+    path: '/',
+    component: ExampleComponent,
+    name: 'home',
+    meta: {
+      breadcrumbs: [{ name: 'Home', path: '/' }]
+    },
+    children: []
   },
-  children: [
-
-  ]
-},
-{
-  path: '/test',
-  component: ExampleComponent,
-  name: 'test',
-  meta: {
-    breadcrumbs: [{ name: 'Home', path: '/' }, { name: 'Test', path: '/test' }]
-  },
-  children: [
-
-  ]
-}
+  {
+    path: '/test',
+    component: ExampleComponent,
+    name: 'test',
+    meta: {
+      breadcrumbs: [{ name: 'Home', path: '/' }, { name: 'Test', path: '/test' }]
+    },
+    children: []
+  }
 ]

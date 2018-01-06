@@ -18,7 +18,6 @@
 </template>
 
 <script>
-  import {EventBus} from '../eventBus'
   export default {
     data () {
       return {
@@ -35,7 +34,7 @@
     },
     mounted () {
       var that = this
-      EventBus.$on('SHOW_TOAST', function (payload) {
+      this.$eventbus.$on('SHOW_TOAST', function (payload) {
         that.show(payload)
       })
     },

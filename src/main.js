@@ -12,6 +12,10 @@ Vue.filter('formatDate', function (value, format) {
   }
 })
 
+import { EventBus } from './eventBus'
+Vue.prototype.$eventbus = EventBus
+Vue.use(EventBus)
+
 //  RxJS
 import Rx from 'rxjs/Rx'
 import VueRx from 'vue-rx'

@@ -14,8 +14,6 @@
 </template>
 
 <script>
-  import { EventBus } from '../eventBus'
-
   export default {
     data () {
       return {
@@ -33,7 +31,7 @@
     },
     mounted () {
       var that = this
-      EventBus.$on('SHOW_DIALOG', function (payload) {
+      this.$eventbus.$on('SHOW_DIALOG', function (payload) {
         that.show(payload)
       })
     },
