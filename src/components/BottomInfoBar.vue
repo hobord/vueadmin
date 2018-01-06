@@ -26,7 +26,7 @@
               </v-btn>
             </v-list-tile-action>
             <v-list-tile-action>
-              <v-btn icon @click.native='delete_message'>
+              <v-btn flat icon color='red' @click.native='delete_message'>
                 <v-icon>delete</v-icon>
               </v-btn>
             </v-list-tile-action>
@@ -38,9 +38,7 @@
           </v-list-tile>
         </v-list>
         <v-slide-y-transition>
-          <v-card-text v-show="show">
-            {{messages[current].text}}
-          </v-card-text>
+          <v-card-text v-show="show" v-html="messages[current].text"></v-card-text>
         </v-slide-y-transition>
       </v-card>
     </v-bottom-sheet>

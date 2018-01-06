@@ -8,6 +8,7 @@
           <div class="panel-body">
             <i class="fas fa-user"></i><br>
             {{stateVar}}
+            <v-btn @click.native="addMessage()">Add message</v-btn>
             <div v-if="hn">
               <ul>
                 <li v-for="item in hn.topStories" :key="item.url">
@@ -79,6 +80,16 @@
     },
     mounted () {
       console.log('Component mounted.')
+    },
+    methods: {
+      addMessage: function () {
+        this.$store.commit('AppMessages/ADD_MESSAGE', {
+          icon: 'info',
+          title: 'Message title: ' + window.moment().toISOString(),
+          subTitle: 'Amet eiusmod aliqua deserunt quis. ',
+          text: 'Anim dolore veniam cillum pariatur veniam. Non magna officia elit consequat eiusmod tempor. Enim excepteur ad enim incididunt. Ad duis exercitation occaecat velit est ipsum. Ad magna magna ut aliquip duis. Ad dolor duis eiusmod qui fugiat ea laboris quis.'
+        })
+      }
     }
   }
 </script>
