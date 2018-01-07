@@ -17,9 +17,9 @@ Vue.prototype.$eventbus = EventBus
 Vue.use(EventBus)
 
 // RxJS
-import Rx from 'rxjs/Rx'
-import VueRx from 'vue-rx'
-Vue.use(VueRx, Rx)
+// import Rx from 'rxjs/Rx'
+// import VueRx from 'vue-rx'
+// Vue.use(VueRx, Rx)
 
 // Shared Data store
 import store from './store/index'

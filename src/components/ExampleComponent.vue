@@ -4,11 +4,16 @@
       <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default">
           <div class="panel-heading">Example Component (Hacker News)</div>
-
           <div class="panel-body">
-            <i class="fas fa-user"></i><br>
-            {{stateVar}}
+            <b><a href="https://next.vuetifyjs.com/components/alerts" target="_blank">Look the components here!</a><br></b>
+            Example fa icon:<i class="fas fa-user"></i><br>
+            Example shared store variable value: "{{stateVar}}"<br>
             <v-btn @click.native="addMessage()">Add message</v-btn>
+            <v-btn @click.native="showToast()">Show Toast</v-btn>
+            <v-btn @click.native="showDialog()">Show Dialog</v-btn>
+            <v-btn @click.native="showLoader()">Show Loader</v-btn>
+            <br>
+            <h2>Hacker news, loaded by GraphQL</h2>
             <div v-if="hn">
               <ul>
                 <li v-for="item in hn.topStories" :key="item.url">
@@ -90,6 +95,24 @@
           text: 'Anim dolore veniam cillum pariatur veniam. Non magna officia elit consequat eiusmod tempor. Enim excepteur ad enim incididunt. Ad duis exercitation occaecat velit est ipsum. Ad magna magna ut aliquip duis. Ad dolor duis eiusmod qui fugiat ea laboris quis.'
         })
         this.$eventbus.$emit('APP.SHOW_BOTTOM_MESSAGES')
+      },
+      showToast: function () {
+        this.$eventbus.$emit('APP.SHOW_TOAST', {
+          text: 'Here is an example text of Toast',
+          warning: true
+        })
+      },
+      showDialog: function () {
+        this.$eventbus.$emit('APP.SHOW_DIALOG', {
+          title: 'Dialog title',
+          content: 'Here is an example text of dialog box'
+        })
+      },
+      showLoader: function () {
+        this.$eventbus.$emit('APP.SHOW_LOADER')
+        setTimeout(() => {
+          this.$eventbus.$emit('APP.HIDE_LOADER')
+        }, 1500)
       }
     }
   }
