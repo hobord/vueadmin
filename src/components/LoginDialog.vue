@@ -1,7 +1,9 @@
 <<template>
   <v-dialog persistent v-model='dlg' max-width="500px">
     <v-card>
-      <v-card-media src="/static/login_emo.jpg" height="200px">
+      <v-card-media
+        :src="require('assets/login_emo.jpg')"
+        height="200px">
       </v-card-media>
       <v-card-title>
         <v-form style="width: 100%">
