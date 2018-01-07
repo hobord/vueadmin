@@ -4,3 +4,4 @@ dist/
 publish
 package-lock.json
 npm-debug.log
+.vscode/temp.sql
