@@ -31,6 +31,10 @@ import VueAxios from 'vue-axios'
 import axios from 'axios'
 Vue.use(VueAxios, axios)
 
+import { ServiceBus } from './services/index'
+Vue.prototype.$services = ServiceBus
+Vue.use(ServiceBus)
+
 // Apollo
 import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
@@ -84,3 +88,4 @@ window.app = new Vue({
   apolloProvider,
   render: h => h(App)
 })
+
