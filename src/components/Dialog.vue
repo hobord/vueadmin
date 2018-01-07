@@ -1,6 +1,5 @@
 <template>
-  <v-dialog v-model="isVisible" persistent>
-    div*3>span
+  <v-dialog v-model="isVisible" persistent :max-width='maxWidth'>
     <v-card>
       <v-card-title class="headline" :class="classes">{{title}}</v-card-title>
       <v-card-text>{{content}}</v-card-text>
@@ -18,6 +17,7 @@
     data () {
       return {
         isVisible: false,
+        maxWidth: '500px',
         classes: 'red',
         title: 'Warning!',
         content: 'Are you sure you want to delete the content?',
@@ -31,7 +31,7 @@
     },
     mounted () {
       var that = this
-      this.$eventbus.$on('SHOW_DIALOG', function (payload) {
+      this.$eventbus.$on('APP.SHOW_DIALOG', function (payload) {
         that.show(payload)
       })
     },
@@ -40,16 +40,16 @@
         console.log('btnOk Clicked')
       },
       show (payload) {
-        if (payload.callback) this.btnOkCallback = payload.callback
-        if (payload.classes) this.classes = payload.classes
-        if (payload.title) this.title = payload.title
-        if (payload.content) this.content = payload.content
-        if (payload.btnCancelText) this.btnCancelText = payload.btnCancelText
-        if (payload.btnCancelClasses) this.btnCancelClasses = payload.btnCancelClasses
-        if (payload.btnOkText) this.btnOkText = payload.btnOkText
-        if (payload.btnOkClasses) this.btnOkClasses = payload.btnOkClasses
-        if (payload.payload) this.payload = payload.payload
-
+        this.maxWidth = (payload.maxWidth) ? payload.maxWidth : '500px'
+        this.callback = (payload.callback) ? payload.callback : this.deafultCallBack
+        this.classes = (payload.classes) ? payload.classes : 'red'
+        this.title = (payload.title) ? payload.title : 'Title'
+        this.content = (payload.content) ? payload.content : 'Title'
+        this.btnCancelText = (payload.btnCancelText) ? payload.btnCancelText : 'Cancel'
+        this.btnCancelClasses = (payload.btnCancelClasses) ? payload.btnCancelClasses : 'green--text'
+        this.btnOkText = (payload.btnOkText) ? payload.btnOkText : 'Ok'
+        this.btnOkClasses = (payload.btnOkClasses) ? payload.btnOkClasses : 'red--text'
+        this.payload = (payload.payload) ? payload.payload : null
         this.isVisible = true
       },
       btnCancel () {

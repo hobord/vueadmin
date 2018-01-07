@@ -30,7 +30,7 @@
     },
     mounted () {
       var that = this
-      this.$eventbus.$on('SHOW_TOAST', function (payload) {
+      this.$eventbus.$on('APP.SHOW_TOAST', function (payload) {
         that.show(payload)
       })
     },
