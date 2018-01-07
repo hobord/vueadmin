@@ -5,3 +5,4 @@ publish
 package-lock.json
 npm-debug.log
 .vscode/temp.sql
+.vscode/last.sql
