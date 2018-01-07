@@ -1,19 +1,16 @@
 <template>
   <v-snackbar
-      bottom
-      :multi-line=true
-      :vertical=true
-      :success="success"
-      :info="info"
-      :warning="warning"
-      :error="error"
-      :primary="primary"
-      :secondary="secondary"
+      absolute
+      :top="top"
+      :bottom="bottom"
+      :multi-line="multiLine"
+      :vertical="vertical"
+      :color="color"
       :timeout="timeout"
       v-model="visible"
   >
     {{ text }}
-    <v-btn flat @click.native="visible = false">Close</v-btn>
+    <v-btn flat @click.native="visible = false" dark>Close</v-btn>
   </v-snackbar>
 </template>
 
@@ -21,13 +18,12 @@
   export default {
     data () {
       return {
-        success: false,
-        info: false,
-        warning: false,
-        error: false,
-        primary: false,
-        secondary: false,
+        top: false,
+        bottom: true,
+        color: 'primary',
         visible: false,
+        vertical: false,
+        multiLine: false,
         timeout: 6000,
         text: ''
       }
@@ -40,32 +36,19 @@
     },
     methods: {
       show (payload) {
-        this.success = false
-        this.info = false
-        this.warning = false
-        this.error = false
-        this.primary = false
-        this.secondary = false
-        this.text = ''
-        switch (payload.type) {
-          case 'success': this.success = true
-            break
-          case 'info': this.info = true
-            break
-          case 'warning': this.warning = true
-            break
-          case 'error': this.error = true
-            break
-          case 'primary': this.primary = true
-            break
-          case 'secondary': this.secondary = true
-            break
-          default: this.primary = true
-            break
+        this.top = false
+        this.bottom = true
+        if (payload.top) {
+          this.top = true
+          this.bottom = false
         }
         this.text = payload.text
+        this.color = (payload.color) ? payload.color : 'primary'
+        this.timeout = (payload.timeout) ? payload.timeout : 6000
+        this.vertical = (payload.vertical) ? payload.vertical : false
+        this.multiLine = (payload.multiLine) ? payload.multiLine : false
         this.visible = true
-        console.log('TOAST (' + payload.type + '):' + payload.text)
+        console.log('TOAST (' + payload.color + '): ' + payload.text)
       }
     }
   }

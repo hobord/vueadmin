@@ -63,6 +63,7 @@
         } else {
           this.btnOkCallback()
         }
+        this.btnOkCallback = this.deafultCallBack
       }
     }
   }
