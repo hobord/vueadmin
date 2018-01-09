@@ -1,19 +1,25 @@
 let querystring = require('querystring')
 import Vue from 'vue'
 
+let clientSecret = document.head.querySelector('meta[name="client-secret"]')
+clientSecret = (clientSecret) ? clientSecret.content : ''
+
+let oauthUrl = document.head.querySelector('meta[name="oauth-url"]')
+oauthUrl = (oauthUrl) ? oauthUrl.content : ''
+
 export const UserService = {
   authUser: function (auth) {
     return new Promise((resolve, reject) => {
       let data = {
         grant_type: 'password',
         client_id: 2,
-        client_secret: 'cCedcFqdWYN1FGXKpQcfN1zMYb1Lqv7MiYKKH1Mf',
+        client_secret: clientSecret,
         scope: '',
         username: auth.email,
         password: auth.password
       }
 
-      Vue.axios.post('http://192.168.99.100:8080/oauth/token', querystring.stringify(data))
+      Vue.axios.post(oauthUrl, querystring.stringify(data))
       .then(response => {
         resolve(response.data)
       })

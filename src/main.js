@@ -5,7 +5,7 @@ import 'assets/style/main.scss'
 import Vue from 'vue'
 window.moment = window.moment || require('moment')
 
-// Filters  s
+// Filters
 Vue.filter('formatDate', function (value, format) {
   if (value) {
     return window.moment(String(value)).format(format)
