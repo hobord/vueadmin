@@ -13,6 +13,8 @@ const store = () => new Vuex.Store({
     AppMessages
   },
   state: {
+    auth_data: {},
+    user: {},
     stateVar: 'example vuex store data'
   },
   actions: {
@@ -37,8 +39,19 @@ const store = () => new Vuex.Store({
 //     });
 //   },
   },
-  mutations: {},
-  getters: {},
+  mutations: {
+    SET_AUTH_DATA (state, data) {
+      state.auth_data = data
+    },
+    SET_USER (state, user) {
+      state.user = user
+    }
+  },
+  getters: {
+    auth_header: state => {
+      return 'Bearer '.concat(state.auth_data.access_token)
+    }
+  },
   strict: debug
   // plugins: debug ? [createLogger()] : []
 })

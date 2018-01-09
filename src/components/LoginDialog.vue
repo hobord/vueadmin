@@ -7,6 +7,9 @@
       </v-card-media>
       <v-card-title>
         <v-form style="width: 100%">
+          <v-alert type="error" :value="error">
+            Authentication error!
+          </v-alert>
           <v-text-field
             name="authUser.email"
             v-model="authUser.email"
@@ -20,6 +23,7 @@
             type="password"
             required
             v-model="authUser.password"
+            v-on:keyup.enter='login'
           ></v-text-field>
         </v-form>
       </v-card-title>
@@ -33,7 +37,7 @@
         <v-btn color="primary"
           :loading="loading"
           :disabled="loading"
-          @click.stop="login()"
+          @click.stop="login"
           >Login
         </v-btn>
       </v-card-actions>
@@ -47,19 +51,28 @@
       return {
         dlg: true,
         loading: false,
+        error: false,
         authUser: {
           email: null,
           password: null
         }
       }
     },
+    mounted () {
+      this.$eventbus.$on('APP.AUTH_USER_ERROR', this.auth_error)
+    },
     methods: {
       login: function () {
+        this.error = false
         this.loading = true
         this.$eventbus.$emit('APP.AUTH_USER', {
           email: this.authUser.email,
-          content: this.authUser.password
+          password: this.authUser.password
         })
+      },
+      auth_error: function () {
+        this.loading = false
+        this.error = true
       }
     }
   }

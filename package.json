@@ -58,6 +58,7 @@
     "url-loader": "^0.5.7",
     "vue-apollo": "^3.0.0-alpha.2",
     "vue-axios": "^2.0.2",
+    "vue-cookies": "^1.5.4",
     "vue-loader": "^10.0.0",
     "vue-router": "^3.0.1",
     "vue-rx": "^5.0.0",

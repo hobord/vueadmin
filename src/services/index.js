@@ -1,7 +1,10 @@
-import Vue from 'vue'
+import { UserService } from './UserService'
 
-import { ExmpleService } from './ExmpleService'
+const ServicesPlugin = {
+  install (Vue, options) {
+    Vue.prototype.$services = {}
+    Vue.prototype.$services.userService = UserService
+  }
+}
 
-export const ServiceBus = new Vue()
-
-ServiceBus.ExmpleService = ExmpleService
+export default ServicesPlugin
