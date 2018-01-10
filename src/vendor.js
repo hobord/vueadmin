@@ -40,7 +40,8 @@ import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import VueApollo from 'vue-apollo'
-var APOLLO_ENDPOINT = 'https://www.graphqlhub.com/graphql'
+let APOLLO_ENDPOINT = document.head.querySelector('meta[name="graphql-url"]')
+APOLLO_ENDPOINT = (APOLLO_ENDPOINT) ? APOLLO_ENDPOINT.content : ''
 const httpLink = new HttpLink({
   // You should use an absolute URL here
   uri: APOLLO_ENDPOINT

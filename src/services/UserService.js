@@ -10,6 +10,9 @@ clientId = (clientId) ? clientId.content : ''
 let clientSecret = document.head.querySelector('meta[name="oauth-client-secret"]')
 clientSecret = (clientSecret) ? clientSecret.content : ''
 
+let apiUrl = document.head.querySelector('meta[name="api-url"]')
+apiUrl = (apiUrl) ? apiUrl.content : ''
+
 export const UserService = {
   authUser: function (auth) {
     return new Promise((resolve, reject) => {
@@ -34,7 +37,7 @@ export const UserService = {
   },
   loadUser: function () {
     return new Promise((resolve, reject) => {
-      Vue.axios.get('/api/user')
+      Vue.axios.get(apiUrl + '/user')
       .then(response => {
         resolve(response.data)
       })
