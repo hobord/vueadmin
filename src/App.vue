@@ -165,15 +165,8 @@
       }
     },
     created () {
-      if (this.$cookies.isKey('access_token')) {
-        let data = {
-          access_token: this.$cookies.get('access_token'),
-          expires_in: this.$cookies.get('expires_in'),
-          refresh_token: this.$cookies.get('refresh_token'),
-          token_type: this.$cookies.get('token_type')
-        }
-        this.$store.commit('SET_AUTH_DATA', data)
-        this.axios.defaults.headers.common['Authorization'] = this.$store.getters.auth_header
+      if(this.loggedin) {
+        this.axios.defaults.headers.common['Authorization'] = this.$store.getters.auth_header;
         this.load_user()
       }
     },
@@ -203,10 +196,6 @@
         this.$services.userService.authUser(auth).then(response => {
           this.$store.commit('SET_AUTH_DATA', response)
           this.$store.commit('SET_AUTH_DATA', response)
-          this.$cookies.set('access_token', response.access_token)
-          this.$cookies.set('expires_in', response.expires_in)
-          this.$cookies.set('refresh_token', response.refresh_token)
-          this.$cookies.set('token_type', response.token_type)
 
           this.axios.defaults.headers.common['Authorization'] = this.$store.getters.auth_header
           this.load_user()
@@ -216,16 +205,11 @@
         })
       },
       logout: function (event) {
-        // this.loggedin = false
-        this.$cookies.remove('access_token')
-        this.$cookies.remove('expires_in')
-        this.$cookies.remove('refresh_token')
-        this.$cookies.remove('token_type')
 
         this.$store.commit('SET_AUTH_DATA', {})
         this.$store.commit('SET_USER', {})
-
-        document.location.reload()
+        window.localStorage.clear()
+        router.push('/')
       },
       load_user: function () {
         this.$services.userService.loadUser().then(response => {

@@ -1,16 +1,23 @@
 import Vuex from 'vuex'
-// import axios from 'axios'
-// const util = require('util')
-const debug = process.env.NODE_ENV !== 'production'
+import VuexPersistence from 'vuex-persist'
+
+const vuexLocal = new VuexPersistence({
+  // storage: window.localStorage
+  storage: window.sessionStorage
+})
+
+const debug = false // process.env.NODE_ENV !== 'production'
 
 import ModuleNameStore from './module/module'
 import AppMessages from './app_messages/app_messages'
+import Paginators from './paginators/paginators'
 
 const store = () => new Vuex.Store({
-// export default  store = new Vuex.Store({
+  strict: debug,
   modules: {
     ModuleNameStore,
-    AppMessages
+    AppMessages,
+    Paginators
   },
   state: {
     auth_data: {},
@@ -52,8 +59,7 @@ const store = () => new Vuex.Store({
       return 'Bearer '.concat(state.auth_data.access_token)
     }
   },
-  strict: debug
-  // plugins: debug ? [createLogger()] : []
+  plugins: [vuexLocal.plugin]
 })
 
 export default store

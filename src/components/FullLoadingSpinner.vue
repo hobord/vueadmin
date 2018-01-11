@@ -46,7 +46,7 @@
   }
 </script>
 
-<style>
+<style scoped>
 .white-overlay {
     background-color: rgba(255, 255, 255, 0.75);
     z-index: 9999;

@@ -99,7 +99,7 @@
       showToast: function () {
         this.$eventbus.$emit('APP.SHOW_TOAST', {
           text: 'Here is an example text of Toast',
-          warning: true
+          color: 'red'
         })
       },
       showDialog: function () {
