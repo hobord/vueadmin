@@ -5,6 +5,11 @@ import 'assets/style/main.scss'
 import Vue from 'vue'
 window.moment = window.moment || require('moment')
 
+// // Eventbus
+// import { eventBus } from './eventBus.js'
+// Vue.prototype.$eventbus = eventBus
+// // Vue.use(eventBus)
+
 // Filters
 Vue.filter('formatDate', function (value, format) {
   if (value) {

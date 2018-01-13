@@ -31,9 +31,11 @@ import ServicesPlugin from './services/index'
 Vue.use(ServicesPlugin)
 
 // RxJS
-// import Rx from 'rxjs/Rx'
-// import VueRx from 'vue-rx'
-// Vue.use(VueRx, Rx)
+import VueRx from 'vue-rx'
+import Rx from 'rxjs/Rx'
+Vue.use(VueRx, Rx)
+// import { Observable } from 'rxjs/Observable'
+// Vue.use(VueRx, Observable)
 
 // Apollo
 import { ApolloClient } from 'apollo-client'

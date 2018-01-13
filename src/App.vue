@@ -165,8 +165,8 @@
       }
     },
     created () {
-      if(this.loggedin) {
-        this.axios.defaults.headers.common['Authorization'] = this.$store.getters.auth_header;
+      if (this.loggedin) {
+        this.axios.defaults.headers.common['Authorization'] = this.$store.getters.auth_header
         this.load_user()
       }
     },
@@ -174,6 +174,7 @@
       // console.log(this.adminMenu)
       this.$eventbus.$on('APP.AUTH_USER', this.login)
       this.$eventbus.$on('APP.LOGOUT_USER', this.logout)
+      this.$eventbus.$on('APP.REFRESHTOKEN', this.refreshToken)
 
       // this.$store.dispatch('MenuStore/GET_MENU_ITEMS').then(()=>{})
 
@@ -195,7 +196,6 @@
       login: function (auth) {
         this.$services.userService.authUser(auth).then(response => {
           this.$store.commit('SET_AUTH_DATA', response)
-          this.$store.commit('SET_AUTH_DATA', response)
 
           this.axios.defaults.headers.common['Authorization'] = this.$store.getters.auth_header
           this.load_user()
@@ -204,12 +204,22 @@
           this.$eventbus.$emit('APP.AUTH_USER_ERROR', error)
         })
       },
-      logout: function (event) {
+      refreshToken: function () {
+        let refreshToken = this.$store.state.auth_data.refresh_token
+        this.$services.userService.refreshToken(refreshToken).then(response => {
+          this.$store.commit('SET_AUTH_DATA', response)
 
+          this.axios.defaults.headers.common['Authorization'] = this.$store.getters.auth_header
+        }).catch(error => {
+          console.log(error)
+          this.$eventbus.$emit('APP.AUTH_USER_ERROR', error)
+        })
+      },
+      logout: function (event) {
         this.$store.commit('SET_AUTH_DATA', {})
         this.$store.commit('SET_USER', {})
         window.localStorage.clear()
-        router.push('/')
+        this.router.push('/')
       },
       load_user: function () {
         this.$services.userService.loadUser().then(response => {

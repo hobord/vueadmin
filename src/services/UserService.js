@@ -15,6 +15,17 @@ apiUrl = (apiUrl) ? apiUrl.content : ''
 
 export const UserService = {
   authUser: function (auth) {
+    Vue.axios.interceptors.response.use((response) => {
+      return response
+    }, function (error) {
+      // Do something with response error
+      if (error.response.status === 401) {
+        Vue.prototype.$eventbus.$emit('APP.LOGOUT_USER')
+        console.log('unauthorized, logging out ...')
+      }
+      return Promise.reject(error.response)
+    })
+
     return new Promise((resolve, reject) => {
       let data = {
         grant_type: 'password',
@@ -33,6 +44,26 @@ export const UserService = {
         console.log('error ' + error)
         reject(error.response.data)
       })
+    })
+  },
+  refreshToken: function (refreshToken) {
+    return new Promise((resolve, reject) => {
+      let data = {
+        grant_type: 'refresh_token',
+        client_id: clientId,
+        client_secret: clientSecret,
+        scope: '',
+        refresh_token: refreshToken
+      }
+
+      Vue.axios.post(oauthUrl, querystring.stringify(data))
+        .then(response => {
+          resolve(response.data)
+        })
+        .catch((error) => {
+          console.log('error ' + error)
+          reject(error.response.data)
+        })
     })
   },
   loadUser: function () {
