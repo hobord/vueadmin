@@ -23,14 +23,14 @@
                 </li>
               </ul>
             </div>
-            <tinymce
+            <!-- <tinymce
               id="tinymceeditor"
               v-model="content"
               :toolbar1="tinymceOptions.toolbar1"
               :toolbar2="tinymceOptions.toolbar2"
               :plugins="tinymceOptions.plugins"
               :other_options="tinymceOptions.other_options"
-            ></tinymce>
+            ></tinymce> -->
             <!-- <div id="description"></div> -->
           </div>
         </div>
@@ -52,11 +52,11 @@
 
 <script>
   import Query from '../apollo/hnews.gql'
-  import tinymce from './TinimceVue.vue'
+  // import tinymce from './TinimceVue.vue'
 
   export default {
     components: {
-      tinymce
+      // tinymce
     },
     data: () => ({
       loading: 0,
