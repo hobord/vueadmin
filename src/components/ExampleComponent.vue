@@ -113,7 +113,7 @@
       filters: {},
       table: {
         rowsPerPage: [5, 10, 15, 20, 30, 50, 100],
-        totalItems: 100,
+        totalItems: 0,
         headers: [
           {
             text: 'Id',
@@ -228,8 +228,9 @@
       },
       getReport: function () {
         let that = this
-        this.axios('/api/posts').then(function (result) {
-          that.table.items = result.data
+        this.axios('/static/paginated.json').then(function (result) {
+          that.table.items = result.data.data
+          that.table.totalItems = 100
         })
         // this.$services.ReportService.list({
         //   pagination: this.pagination,
