@@ -19,11 +19,10 @@ npm run build
 
 # App Events on EventBus
 
-You can access the event bus like
+You can access the event bus this way:
 ```
   this.$eventbus.$emit('APP.BOTTOM_MESSAGES.SHOW')
 ```
-
 or You can import
 ```
   import { EventBus } from 'src/eventBus'
@@ -35,7 +34,7 @@ Listening in app component:
 
 Listening in FullLoadingSpinner:
   - APP.LOADER.SHOW
-  - APP.LOADER.SET_VALUE, {value:5}
+  - APP.LOADER.SET_VALUE, {value: 5}
   - APP.LOADER.HIDE
   - APP.LOADER.HIDE_ALL
 
@@ -43,7 +42,7 @@ Listening in Dialog:
   - APP.DIALOG.SHOW, {}
 
 Listening in Toast:
-  - APP.TOAST.SHOW
+  - APP.TOAST.SHOW, {}
 
 Listening in BottomInfoBar:
   - APP.BOTTOM_MESSAGES.SHOW
