@@ -34,22 +34,33 @@
         </v-list-tile>
 
         <v-divider></v-divider>
-      </v-list>
 
-      <v-list>
-        <v-list-tile v-for="item in adminMenu"
+        <v-list-group
+          v-for="item in adminMenu"
           :key="item.title"
-          :prepend-icon="item.icon"
-          :to="item.to">
-          <v-list-tile-action>
-            <v-icon>{{item.icon}}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>
-              {{item.title}}
-            </v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
+          :prepend-icon="item.action"
+          :value="(item.active)?true:false"
+          no-action
+        >
+          <v-list-tile slot="activator">
+            <v-list-tile-content>
+              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile
+            v-for="subItem in item.items"
+            :key="subItem.title"
+            :to="subItem.to">
+            <v-list-tile-content>
+              <v-list-tile-title>{{ subItem.title }}</v-list-tile-title>
+            </v-list-tile-content>
+            <v-list-tile-action>
+              <v-icon>{{ subItem.action }}</v-icon>
+            </v-list-tile-action>
+          </v-list-tile>
+        </v-list-group>
+
+        <v-divider></v-divider>
 
         <v-list-tile @click="logout">
           <v-list-tile-action>
@@ -183,10 +194,21 @@
       }
 
       this.$router.afterEach((to, from) => {
+        // Breadcrumbs
         this.breadcrumbs = to.meta.breadcrumbs
         if (to.meta.breadcrumbs) {
           this.breadcrumbs = to.meta.breadcrumbs
         }
+
+        // AdminMenu
+        this.adminMenu.forEach(element => {
+          let found = element.items.find(function (item) {
+            return item.to === to.name
+          })
+          if (found) {
+            element.active = true
+          }
+        })
       })
     },
     methods: {

@@ -17,7 +17,7 @@ npm run dev
 npm run build
 ```
 
-# App Events on EventBus
+## App Events on EventBus
 
 You can access the event bus this way:
 ```
