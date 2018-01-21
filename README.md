@@ -33,15 +33,18 @@ Listening in app component:
   - APP.AUTH.USER_ERROR
   - APP.AUTH.LOGOUT
 
-Listening in FullLoadingSpinner
+Listening in FullLoadingSpinner:
   - APP.LOADER.SHOW
   - APP.LOADER.SET_VALUE, {value:5}
   - APP.LOADER.HIDE
   - APP.LOADER.HIDE_ALL
 
-Listening in Dialog
+Listening in Dialog:
   - APP.DIALOG.SHOW, {}
-Listening in Toast
+
+Listening in Toast:
   - APP.TOAST.SHOW
-Listening in BottomInfoBar
+
+Listening in BottomInfoBar:
   - APP.BOTTOM_MESSAGES.SHOW
+
