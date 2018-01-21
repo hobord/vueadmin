@@ -78,8 +78,11 @@
     },
     data: () => ({
       loading: 0,
+
+      // Editor content
       content: '',
 
+      // Table properties
       pagination: {},
       filters: {},
       table: {
@@ -97,44 +100,7 @@
         ],
         items: []
       }
-      // tinymceOptions: {
-      //   plugins: [
-      //     'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-      //     'searchreplace wordcount visualblocks visualchars code fullscreen',
-      //     'insertdatetime media nonbreaking save table contextmenu directionality',
-      //     'emoticons template paste textcolor colorpicker textpattern'
-      //   ],
-      //   toolbar1: 'styleselect | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | media link image | print preview',
-      //   toolbar2: '',
-      //   other_options: {
-      //     menubar: 'edit insert view format table tools help',
-      //     height: 600,
-      //     paste_data_images: true,
-      //     image_advtab: true,
-      //     file_picker_callback: function (callback, value, meta) {
-      //       // if (meta.filetype === 'image') {
-      //       //   document.getElementById('upload').click()
-      //       //   document.getElementById('upload').addEventListener('change', function () {
-      //       //     var file = this.files[0]
-      //       //     var reader = new FileReader()
-      //       //     reader.onload = function (e) {
-      //       //       callback(e.target.result, {
-      //       //         alt: ''
-      //       //       })
-      //       //     }
-      //       //     reader.readAsDataURL(file)
-      //       //   })
-      //       // }
-      //     },
-      //     templates: [{
-      //       title: 'Test template 1',
-      //       content: 'Test 1'
-      //     }, {
-      //       title: 'Test template 2',
-      //       content: 'Test 2'
-      //     }]
-      //   }
-      // }
+
     }),
     watch: {
       loading: function (newLoading) {
@@ -144,13 +110,14 @@
           this.$eventbus.$emit('APP.HIDE_LOADER')
         }
       },
+      // Watch the paginator of table to save into the store
       pagination: {
         handler: function (val, oldVal) {
           this.$store.commit('Paginators/SET_PAGINATION', {
             paginator_name: 'Reports',
             value: {
-              filters: JSON.parse(JSON.stringify(this.filters)),
-              pagination: JSON.parse(JSON.stringify(val))
+              filters: JSON.parse(JSON.stringify(this.filters)), // Query filter
+              pagination: JSON.parse(JSON.stringify(val)) // Pagination settings
             }
           })
           this.getReport()
@@ -231,6 +198,21 @@
         this.axios('/api/posts').then(function (result) {
           that.table.items = result.data
         })
+        // this.$services.ReportService.list({
+        //   pagination: this.pagination,
+        //   filters: this.filters
+        // }).then(response => {
+        //   this.loading =  0
+        //   this.table.items = response.data;
+        //   this.table.totalItems = response.total;
+        // }).catch(error => {
+        //   this.$eventbus.$emit('APP.SHOW_TOAST', {
+        //     text: 'Error happened! (ReportService.list)',
+        //     color: 'red'
+        //   })
+        //   this.loading =  0
+        //   console.log(error)
+        // })
       }
     }
   }
