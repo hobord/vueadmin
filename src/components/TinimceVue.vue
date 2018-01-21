@@ -59,6 +59,7 @@
 
   import 'tinymce/skins/lightgray/skin.min.css'
   import 'tinymce/skins/lightgray/content.min.css'
+  // import 'tinymce/plugins/visualblocks/css/visualblocks.css'
 
   export default {
     name: 'tinimce',
@@ -73,7 +74,7 @@
         default: function () {
           return [
             'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-            'searchreplace wordcount visualblocks visualchars code fullscreen',
+            'searchreplace wordcount visualchars code fullscreen',
             'insertdatetime media nonbreaking save table contextmenu directionality',
             'template paste textcolor colorpicker textpattern imagetools toc help emoticons hr'
           ]

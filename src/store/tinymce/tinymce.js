@@ -6,14 +6,20 @@ const Tinymce = {
     default: {
       plugins: [
         'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-        'searchreplace wordcount visualblocks visualchars code fullscreen',
+        'searchreplace wordcount visualchars code fullscreen',
         'insertdatetime media nonbreaking save table contextmenu directionality',
         'emoticons template paste textcolor colorpicker textpattern importcss'
       ],
-      toolbar1: 'styleselect | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | media link image | print preview',
+      toolbar1: 'styleselect | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | media link image | fullscreen print preview',
       toolbar2: '',
       other_options: {
         menubar: 'edit insert view format table tools help',
+        link_context_toolbar: true,
+        link_class_list: [
+          {title: 'None', value: ''},
+          {title: 'Dog', value: 'dog'},
+          {title: 'Cat', value: 'cat'}
+        ],
         height: 600,
         importcss_append: true,
         image_title: true,
