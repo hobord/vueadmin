@@ -190,7 +190,7 @@
     },
     methods: {
       show_bottom_messages: function () {
-        this.$eventbus.$emit('APP.SHOW_BOTTOM_MESSAGES')
+        this.$eventbus.$emit('APP.BOTTOM_MESSAGES.SHOW')
       },
       login: function (auth) {
         this.$services.userService.authUser(auth).then(response => {
@@ -200,7 +200,7 @@
           this.load_user()
         }).catch(error => {
           console.log(error)
-          this.$eventbus.$emit('APP.AUTH_USER_ERROR', error)
+          this.$eventbus.$emit('APP.AUTH.USER_ERROR', error)
         })
       },
       refreshToken: function () {
@@ -211,7 +211,7 @@
           this.axios.defaults.headers.common['Authorization'] = this.$store.getters.auth_header
         }).catch(error => {
           console.log(error)
-          this.$eventbus.$emit('APP.AUTH_USER_ERROR', error)
+          this.$eventbus.$emit('APP.AUTH.USER_ERROR', error)
         })
       },
       logout: function (event) {

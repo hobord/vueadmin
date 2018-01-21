@@ -67,7 +67,7 @@ export default {
     }
   },
   mounted () {
-    this.$eventbus.$on('APP.SHOW_BOTTOM_MESSAGES', this.show_messages)
+    this.$eventbus.$on('APP.BOTTOM_MESSAGES.SHOW', this.show_messages)
   },
   methods: {
     delete_message: function () {

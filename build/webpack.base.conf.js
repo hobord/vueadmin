@@ -121,19 +121,19 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'graphql-tag/loader',
       },
-      // {
-      //   test: require.resolve('tinymce/tinymce'),
-      //   loaders: [
-      //     'imports?this=>window',
-      //     'exports?window.tinymce'
-      //   ]
-      // },
-      // {
-      //   test: /tinymce\/(themes|plugins)\//,
-      //   loaders: [
-      //     'imports?this=>window'
-      //   ]
-      // },
+      {
+        test: require.resolve('tinymce/tinymce'),
+        loaders: [
+          'imports?this=>window',
+          'exports?window.tinymce'
+        ]
+      },
+      {
+        test: /tinymce\/(themes|plugins)\//,
+        loaders: [
+          'imports?this=>window'
+        ]
+      },
       // {
       //   test: /tinymce[\\/]skins[\\/]/,
       //   loader: 'file?name=[path][name].[ext]&context=node_modules/tinymce'

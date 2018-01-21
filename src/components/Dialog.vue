@@ -31,7 +31,7 @@
     },
     mounted () {
       var that = this
-      this.$eventbus.$on('APP.SHOW_DIALOG', function (payload) {
+      this.$eventbus.$on('APP.DIALOG.SHOW', function (payload) {
         that.show(payload)
       })
     },

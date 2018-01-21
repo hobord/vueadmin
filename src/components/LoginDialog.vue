@@ -59,7 +59,7 @@
       }
     },
     mounted () {
-      this.$eventbus.$on('APP.AUTH_USER_ERROR', this.auth_error)
+      this.$eventbus.$on('APP.AUTH.USER_ERROR', this.auth_error)
     },
     methods: {
       login: function () {

@@ -11,13 +11,15 @@ const debug = false // process.env.NODE_ENV !== 'production'
 import ModuleNameStore from './module/module'
 import AppMessages from './app_messages/app_messages'
 import Paginators from './paginators/paginators'
+import Tinymce from './tinymce/tinymce'
 
 const store = () => new Vuex.Store({
   strict: debug,
   modules: {
     ModuleNameStore,
     AppMessages,
-    Paginators
+    Paginators,
+    Tinymce
   },
   state: {
     auth_data: {},

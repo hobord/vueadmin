@@ -1,6 +1,7 @@
 <template>
   <div>
       <textarea :id="id">{{ content }}</textarea>
+      <input type="file" style="display:none">
   </div>
 </template>
 
@@ -137,6 +138,7 @@
             })
           }
         }
+        this.other_options.file_picker_callback = this.filePicker
         tinymce.init(this.concatAssciativeArrays(options, this.other_options))
       },
       concatAssciativeArrays (array1, array2) {
@@ -156,6 +158,22 @@
           }, 300)
         }
         this.$emit('input', this.editor.getContent())
+      },
+      filePicker: function (callback, value, meta) {
+        console.log(callback, value, meta)
+        if (meta.filetype === 'image') {
+          // document.getElementById('upload').click()
+          // document.getElementById('upload').addEventListener('change', function () {
+          //   var file = this.files[0]
+          //   var reader = new FileReader()
+          //   reader.onload = function (e) {
+          //     callback(e.target.result, {
+          //       alt: ''
+          //     })
+          //   }
+          //   reader.readAsDataURL(file)
+          // })
+        }
       }
     }
   }

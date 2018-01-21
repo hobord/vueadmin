@@ -22,25 +22,35 @@
   export default {
     data () {
       return {
-        visible: false,
+        queue: 0,
         value: null
       }
     },
+    computed: {
+      visible: {
+        get () {
+          return (this.queue > 0)
+        }
+      }
+    },
     mounted () {
-      this.$eventbus.$on('APP.SHOW_LOADER', this.show)
-      this.$eventbus.$on('APP.HIDE_LOADER', this.hide)
+      this.$eventbus.$on('APP.LOADER.SHOW', this.show)
+      this.$eventbus.$on('APP.LOADER.SET_VALUE', this.setValue)
+      this.$eventbus.$on('APP.LOADER.HIDE', this.hide)
     },
     methods: {
-      show: function (payload) {
-        this.visible = true
+      show: function () {
+        this.queue++
+      },
+      hide: function () {
+        this.queue = (this.queue > 0) ? this.queue - 1 : 0
+      },
+      setValue: function (payload) {
         if (payload) {
           this.value = payload.value
         } else {
           this.value = null
         }
-      },
-      hide: function (payload) {
-        this.visible = false
       }
     }
   }

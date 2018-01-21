@@ -23,15 +23,14 @@
                 </li>
               </ul>
             </div>
-            <!-- <tinymce
+            <tinymce
               id="tinymceeditor"
               v-model="content"
               :toolbar1="tinymceOptions.toolbar1"
               :toolbar2="tinymceOptions.toolbar2"
               :plugins="tinymceOptions.plugins"
               :other_options="tinymceOptions.other_options"
-            ></tinymce> -->
-            <!-- <div id="description"></div> -->
+            ></tinymce>
           </div>
         </div>
       </div>
@@ -52,53 +51,53 @@
 
 <script>
   import Query from '../apollo/hnews.gql'
-  // import tinymce from './TinimceVue.vue'
+  import tinymce from 'src/components/TinimceVue.vue'
 
   export default {
     components: {
-      // tinymce
+      tinymce
     },
     data: () => ({
       loading: 0,
-      content: '',
-      tinymceOptions: {
-        plugins: [
-          'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-          'searchreplace wordcount visualblocks visualchars code fullscreen',
-          'insertdatetime media nonbreaking save table contextmenu directionality',
-          'emoticons template paste textcolor colorpicker textpattern'
-        ],
-        toolbar1: 'styleselect | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | media link image | print preview',
-        toolbar2: '',
-        other_options: {
-          menubar: 'edit insert view format table tools help',
-          height: 600,
-          paste_data_images: true,
-          image_advtab: true,
-          file_picker_callback: function (callback, value, meta) {
-            // if (meta.filetype === 'image') {
-            //   document.getElementById('upload').click()
-            //   document.getElementById('upload').addEventListener('change', function () {
-            //     var file = this.files[0]
-            //     var reader = new FileReader()
-            //     reader.onload = function (e) {
-            //       callback(e.target.result, {
-            //         alt: ''
-            //       })
-            //     }
-            //     reader.readAsDataURL(file)
-            //   })
-            // }
-          },
-          templates: [{
-            title: 'Test template 1',
-            content: 'Test 1'
-          }, {
-            title: 'Test template 2',
-            content: 'Test 2'
-          }]
-        }
-      }
+      content: ''
+      // tinymceOptions: {
+      //   plugins: [
+      //     'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+      //     'searchreplace wordcount visualblocks visualchars code fullscreen',
+      //     'insertdatetime media nonbreaking save table contextmenu directionality',
+      //     'emoticons template paste textcolor colorpicker textpattern'
+      //   ],
+      //   toolbar1: 'styleselect | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | media link image | print preview',
+      //   toolbar2: '',
+      //   other_options: {
+      //     menubar: 'edit insert view format table tools help',
+      //     height: 600,
+      //     paste_data_images: true,
+      //     image_advtab: true,
+      //     file_picker_callback: function (callback, value, meta) {
+      //       // if (meta.filetype === 'image') {
+      //       //   document.getElementById('upload').click()
+      //       //   document.getElementById('upload').addEventListener('change', function () {
+      //       //     var file = this.files[0]
+      //       //     var reader = new FileReader()
+      //       //     reader.onload = function (e) {
+      //       //       callback(e.target.result, {
+      //       //         alt: ''
+      //       //       })
+      //       //     }
+      //       //     reader.readAsDataURL(file)
+      //       //   })
+      //       // }
+      //     },
+      //     templates: [{
+      //       title: 'Test template 1',
+      //       content: 'Test 1'
+      //     }, {
+      //       title: 'Test template 2',
+      //       content: 'Test 2'
+      //     }]
+      //   }
+      // }
     }),
     watch: {
       loading: function (newLoading) {
@@ -132,6 +131,10 @@
         get () {
           return this.$store.state.stateVar
         }
+      },
+      tinymceOptions: function () {
+        let options = JSON.parse(JSON.stringify(this.$store.state.Tinymce.default))
+        return options
       }
     },
     mounted () {
@@ -145,24 +148,24 @@
           subTitle: 'Amet eiusmod aliqua deserunt quis. ',
           text: 'Anim dolore veniam cillum pariatur veniam. Non magna officia elit consequat eiusmod tempor. Enim excepteur ad enim incididunt. Ad duis exercitation occaecat velit est ipsum. Ad magna magna ut aliquip duis. Ad dolor duis eiusmod qui fugiat ea laboris quis.'
         })
-        this.$eventbus.$emit('APP.SHOW_BOTTOM_MESSAGES')
+        this.$eventbus.$emit('APP.BOTTOM_MESSAGES.SHOW')
       },
       showToast: function () {
-        this.$eventbus.$emit('APP.SHOW_TOAST', {
+        this.$eventbus.$emit('APP.TOAST.SHOW', {
           text: 'Here is an example text of Toast',
           color: 'red'
         })
       },
       showDialog: function () {
-        this.$eventbus.$emit('APP.SHOW_DIALOG', {
+        this.$eventbus.$emit('APP.DIALOG.SHOW', {
           title: 'Dialog title',
           content: 'Here is an example text of dialog box'
         })
       },
       showLoader: function () {
-        this.$eventbus.$emit('APP.SHOW_LOADER')
+        this.$eventbus.$emit('APP.LOADER.SHOW')
         setTimeout(() => {
-          this.$eventbus.$emit('APP.HIDE_LOADER')
+          this.$eventbus.$emit('APP.LOADER.HIDE')
         }, 1500)
       }
     }
