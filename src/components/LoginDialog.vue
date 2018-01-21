@@ -59,13 +59,13 @@
       }
     },
     mounted () {
-      this.$eventbus.$on('APP.AUTH.USER_ERROR', this.auth_error)
+
     },
     methods: {
       login: function () {
         this.error = false
         this.loading = true
-        this.$eventbus.$emit('APP.AUTH_USER', {
+        this.$eventbus.$emit('APP.AUTH.LOGIN', {
           email: this.authUser.email,
           password: this.authUser.password
         })

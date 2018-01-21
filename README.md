@@ -8,7 +8,7 @@ vuex, axios, vuetify, apollo, sass, moment
 
 ``` bash
 # install dependencies
-npm install
+npm install -D
 
 # serve with hot reload at localhost:8080
 npm run dev
@@ -17,4 +17,31 @@ npm run dev
 npm run build
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+# App Events on EventBus
+
+You can access the event bus like
+```
+  this.$eventbus.$emit('APP.BOTTOM_MESSAGES.SHOW')
+```
+
+or You can import
+```
+  import { EventBus } from 'src/eventBus'
+```
+Listening in app component:
+  - APP.AUTH.LOGIN
+  - APP.AUTH.USER_ERROR
+  - APP.AUTH.LOGOUT
+
+Listening in FullLoadingSpinner
+  - APP.LOADER.SHOW
+  - APP.LOADER.SET_VALUE, {value:5}
+  - APP.LOADER.HIDE
+  - APP.LOADER.HIDE_ALL
+
+Listening in Dialog
+  - APP.DIALOG.SHOW, {}
+Listening in Toast
+  - APP.TOAST.SHOW
+Listening in BottomInfoBar
+  - APP.BOTTOM_MESSAGES.SHOW

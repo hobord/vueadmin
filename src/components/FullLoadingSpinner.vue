@@ -37,6 +37,7 @@
       this.$eventbus.$on('APP.LOADER.SHOW', this.show)
       this.$eventbus.$on('APP.LOADER.SET_VALUE', this.setValue)
       this.$eventbus.$on('APP.LOADER.HIDE', this.hide)
+      this.$eventbus.$on('APP.LOADER.HIDE_ALL', this.hideAll)
     },
     methods: {
       show: function () {
@@ -44,6 +45,9 @@
       },
       hide: function () {
         this.queue = (this.queue > 0) ? this.queue - 1 : 0
+      },
+      hideAll: function () {
+        this.queue = 0
       },
       setValue: function (payload) {
         if (payload) {

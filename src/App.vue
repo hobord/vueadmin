@@ -172,9 +172,9 @@
     },
     mounted () {
       // console.log(this.adminMenu)
-      this.$eventbus.$on('APP.AUTH_USER', this.login)
-      this.$eventbus.$on('APP.LOGOUT_USER', this.logout)
-      this.$eventbus.$on('APP.REFRESHTOKEN', this.refreshToken)
+      this.$eventbus.$on('APP.AUTH.LOGIN', this.login)
+      this.$eventbus.$on('APP.AUTH.LOGOUT', this.logout)
+      this.$eventbus.$on('APP.AUTH.REFRESHTOKEN', this.refreshToken)
 
       // this.$store.dispatch('MenuStore/GET_MENU_ITEMS').then(()=>{})
 
@@ -219,7 +219,7 @@
         this.$store.commit('SET_AUTH_DATA', {})
         this.$store.commit('SET_USER', {})
         window.localStorage.clear()
-        this.router.push('/')
+        this.$router.push('/')
       },
       load_user: function () {
         this.$services.userService.loadUser().then(response => {
