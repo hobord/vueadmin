@@ -20,7 +20,8 @@
       <v-list dense>
         <v-list-tile avatar tag="div">
           <v-list-tile-avatar>
-            <v-icon color="red darken-4" class="grey lighten-1">fa-user-secret</v-icon>
+            <img :src="user.avatar" v-if="user.avatar">
+            <v-icon color="red darken-4" class="grey lighten-1" v-else>fa-user-secret</v-icon>
           </v-list-tile-avatar>
           <v-list-tile-content>
             <v-list-tile-title>{{user.name}}</v-list-tile-title>

@@ -8,15 +8,22 @@ const Tinymce = {
         'advlist autolink lists link image charmap print preview hr anchor pagebreak',
         'searchreplace wordcount visualblocks visualchars code fullscreen',
         'insertdatetime media nonbreaking save table contextmenu directionality',
-        'emoticons template paste textcolor colorpicker textpattern'
+        'emoticons template paste textcolor colorpicker textpattern importcss'
       ],
       toolbar1: 'styleselect | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | media link image | print preview',
       toolbar2: '',
       other_options: {
         menubar: 'edit insert view format table tools help',
         height: 600,
-        paste_data_images: true,
+        importcss_append: true,
+        image_title: true,
         image_advtab: true,
+        paste_data_images: true,
+        image_class_list: [
+          {title: 'None', value: ''},
+          {title: 'Dog', value: 'dog'},
+          {title: 'Cat', value: 'cat'}
+        ],
         templates: [{
           title: 'Test template 1',
           content: 'Test 1'
