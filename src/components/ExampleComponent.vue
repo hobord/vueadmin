@@ -23,6 +23,25 @@
                 </li>
               </ul>
             </div>
+            <br><br>
+            <v-data-table
+            v-bind:headers="table.headers"
+            :hide-actions="true"
+            :items="table.items"
+            :pagination.sync="pagination"
+            :rows-per-page-items="table.rowsPerPage"
+            :total-items="table.totalItems"
+            class="elevation-1"
+            >
+              <template slot="items" slot-scope="props">
+                <td>{{ props.item.id }}</td>
+                <td>{{ props.item.userId }}</td>
+                <td>{{ props.item.title }}</td>
+              </template>
+            </v-data-table>
+
+            <br><br>
+
             <tinymce
               id="tinymceeditor"
               v-model="content"
@@ -59,7 +78,25 @@
     },
     data: () => ({
       loading: 0,
-      content: ''
+      content: '',
+
+      pagination: {},
+      filters: {},
+      table: {
+        rowsPerPage: [5, 10, 15, 20, 30, 50, 100],
+        totalItems: 0,
+        headers: [
+          {
+            text: 'Id',
+            align: 'left',
+            sortable: true,
+            value: 'id'
+          },
+          { text: 'user ID', value: 'userId' },
+          { text: 'Title', value: 'title' }
+        ],
+        items: []
+      }
       // tinymceOptions: {
       //   plugins: [
       //     'advlist autolink lists link image charmap print preview hr anchor pagebreak',
@@ -106,6 +143,19 @@
         } else {
           this.$eventbus.$emit('APP.HIDE_LOADER')
         }
+      },
+      pagination: {
+        handler: function (val, oldVal) {
+          this.$store.commit('Paginators/SET_PAGINATION', {
+            paginator_name: 'Reports',
+            value: {
+              filters: JSON.parse(JSON.stringify(this.filters)),
+              pagination: JSON.parse(JSON.stringify(val))
+            }
+          })
+          this.getReport()
+        },
+        deep: true
       }
     },
     // Apollo GraphQL
@@ -135,10 +185,18 @@
       tinymceOptions: function () {
         let options = JSON.parse(JSON.stringify(this.$store.state.Tinymce.default))
         return options
+      },
+      pages () {
+        if (this.table.pagination.rowsPerPage == null ||
+          this.table.totalItems == null
+        ) return 0
+
+        return Math.ceil(this.table.totalItems / this.table.pagination.rowsPerPage)
       }
     },
     mounted () {
       console.log('Component mounted.')
+      this.getReport()
     },
     methods: {
       addMessage: function () {
@@ -167,6 +225,12 @@
         setTimeout(() => {
           this.$eventbus.$emit('APP.LOADER.HIDE')
         }, 1500)
+      },
+      getReport: function () {
+        let that = this
+        this.axios('/api/posts').then(function (result) {
+          that.table.items = result.data
+        })
       }
     }
   }

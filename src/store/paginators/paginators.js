@@ -6,7 +6,7 @@ const Paginators = {
   subStore: 'Paginators',
   prefix: 'Paginators/',
   state: {
-    imageReports: {
+    Reports: {
       filters: {
         text: '',
         show_our: true,
