@@ -26,7 +26,7 @@
             <br><br>
             <v-data-table
             v-bind:headers="table.headers"
-            :hide-actions="true"
+            :hide-actions="false"
             :items="table.items"
             :pagination.sync="pagination"
             :rows-per-page-items="table.rowsPerPage"
@@ -39,6 +39,33 @@
                 <td>{{ props.item.title }}</td>
               </template>
             </v-data-table>
+
+            <v-layout>
+              <v-spacer></v-spacer>
+              <v-select
+                v-bind:items="table.rowsPerPage"
+                v-model="pagination.rowsPerPage"
+                single-line
+                style="max-width:65px"
+                bottom
+              ></v-select>
+              <div class="text-xs-center pt-2">
+                <v-pagination
+                  v-model="pagination.page"
+                  :length="pages"
+                  :total-visible="9"></v-pagination>
+              </div>
+              <v-text-field
+                v-model.number.lazy.trim="pagination.page"
+                mask="#####"
+                prefix="page:"
+                single-line
+                style="max-width: 80px;"
+                @keyup.up="pagination.page++"
+                @keyup.down="pagination.page = (pagination.page>1)? pagination.page-1: 1"
+              ></v-text-field>
+              <v-spacer></v-spacer>
+            </v-layout>
 
             <br><br>
 
@@ -81,13 +108,12 @@
 
       // Editor content
       content: '',
-
       // Table properties
       pagination: {},
       filters: {},
       table: {
         rowsPerPage: [5, 10, 15, 20, 30, 50, 100],
-        totalItems: 0,
+        totalItems: 100,
         headers: [
           {
             text: 'Id',
@@ -103,6 +129,7 @@
 
     }),
     watch: {
+      // Loader indicator
       loading: function (newLoading) {
         if (newLoading !== 0) {
           this.$eventbus.$emit('APP.SHOW_LOADER')
@@ -153,13 +180,19 @@
         let options = JSON.parse(JSON.stringify(this.$store.state.Tinymce.default))
         return options
       },
+      // Table pages caculator
       pages () {
-        if (this.table.pagination.rowsPerPage == null ||
+        if (this.pagination.rowsPerPage === null ||
           this.table.totalItems == null
         ) return 0
-
-        return Math.ceil(this.table.totalItems / this.table.pagination.rowsPerPage)
+        return Math.ceil(this.table.totalItems / this.pagination.rowsPerPage)
       }
+    },
+    created () {
+      // Load table filter and pagination data from store
+      let p = JSON.parse(JSON.stringify(this.$store.state.Paginators))
+      this.pagination = p.Reports.pagination
+      this.filters = p.Reports.filters
     },
     mounted () {
       console.log('Component mounted.')
