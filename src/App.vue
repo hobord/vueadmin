@@ -15,7 +15,6 @@
       fixed
       hide-overlay
       :mini-variant.sync="mini"
-      clipped
       app
       v-model="drawer">
       <v-list dense>

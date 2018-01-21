@@ -1,5 +1,6 @@
 let querystring = require('querystring')
 import Vue from 'vue'
+import { EventBus } from 'src/eventBus'
 
 let oauthUrl = document.head.querySelector('meta[name="oauth-url"]')
 oauthUrl = (oauthUrl) ? oauthUrl.content : ''
@@ -20,7 +21,7 @@ export const UserService = {
     }, function (error) {
       // Do something with response error
       if (error.response.status === 401) {
-        Vue.prototype.$eventbus.$emit('APP.LOGOUT_USER')
+        EventBus.$emit('APP.LOGOUT_USER')
         console.log('unauthorized, logging out ...')
       }
       return Promise.reject(error.response)

@@ -1,10 +1,10 @@
 window.moment = window.moment || require('moment')
 window._ = window._ || require('lodash')
-
 import Vue from 'vue'
 
 // Eventbus
-Vue.prototype.$eventbus = new Vue()
+import { EventBus } from 'src/eventBus'
+Vue.prototype.$eventbus = EventBus
 
 // Cookie
 import VueCookies from 'vue-cookies'
