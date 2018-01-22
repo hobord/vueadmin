@@ -51,10 +51,13 @@
             v-for="subItem in item.items"
             :key="subItem.title"
             :to="subItem.to">
+            <v-list-tile-action v-if="mini">
+              <v-icon>{{ subItem.action }}</v-icon>
+            </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title>{{ subItem.title }}</v-list-tile-title>
             </v-list-tile-content>
-            <v-list-tile-action>
+            <v-list-tile-action v-if="!mini">
               <v-icon>{{ subItem.action }}</v-icon>
             </v-list-tile-action>
           </v-list-tile>
@@ -203,7 +206,11 @@
         // AdminMenu
         this.adminMenu.forEach(element => {
           let found = element.items.find(function (item) {
-            return item.to.name === to.name
+            if (item.to) {
+              return item.to.name === to.name
+            } else {
+              return false
+            }
           })
           if (found) {
             element.active = true
@@ -260,5 +267,8 @@
     }
     .fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
         opacity: 0
+    }
+    .list__group__items--no-action .list__tile {
+      padding-left: 16px;
     }
 </style>

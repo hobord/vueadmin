@@ -76,10 +76,10 @@ export let adminMenu = [
     title: 'Examples',
     // active: true,
     items: [
-      { title: 'Apollo GrapQL', action: 'local_activity', to: {name: 'apollo'} },
-      { title: 'Grid', action: 'local_activity', to: {name: 'grid'} },
-      { title: 'Messages', action: 'local_activity', to: {name: 'messages'} },
-      { title: 'Editor', action: 'local_activity', to: {name: 'editor'} }
+      { title: 'Apollo GrapQL', action: 'explore', to: {name: 'apollo'} },
+      { title: 'Grid', action: 'dns', to: {name: 'grid'} },
+      { title: 'Messages', action: 'face', to: {name: 'messages'} },
+      { title: 'Editor', action: 'grade', to: {name: 'editor'} }
     ]
   },
   {
