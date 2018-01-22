@@ -1,6 +1,5 @@
 <template>
   <v-snackbar
-      absolute
       :top="top"
       :bottom="bottom"
       :multi-line="multiLine"
