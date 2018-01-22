@@ -203,7 +203,7 @@
         // AdminMenu
         this.adminMenu.forEach(element => {
           let found = element.items.find(function (item) {
-            return item.to === to.name
+            return item.to.name === to.name
           })
           if (found) {
             element.active = true

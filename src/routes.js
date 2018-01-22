@@ -1,9 +1,3 @@
-const ExampleComponent = resolve => {
-  require.ensure(['./components/ExampleComponent.vue'], () => {
-    resolve(require('./components/ExampleComponent.vue'))
-  })
-}
-
 const ExampleApollo = resolve => {
   require.ensure(['./components/Examples/ApolloGraphQL.vue'], () => {
     resolve(require('./components/Examples/ApolloGraphQL.vue'))
@@ -35,15 +29,6 @@ export let routes = [
     name: 'home',
     meta: {
       breadcrumbs: [{ name: 'Home', path: '/' }]
-    },
-    children: []
-  },
-  {
-    path: '/test',
-    component: ExampleComponent,
-    name: 'test',
-    meta: {
-      breadcrumbs: [{ name: 'Home', path: '/' }, { name: 'Test', path: '/test' }]
     },
     children: []
   },
