@@ -149,7 +149,7 @@
         right: false,
         badge: 0,
         breadcrumbs: [],
-        adminMenu: adminMenu
+        adminMenu: []
       }
     },
     computed: {
@@ -179,23 +179,26 @@
       }
     },
     created () {
+      // Check logined user
       if (this.loggedin) {
         this.axios.defaults.headers.common['Authorization'] = this.$store.getters.auth_header
         this.load_user()
       }
+      // Load adminMenu
+      this.loadAdminMenu()
     },
     mounted () {
-      // console.log(this.adminMenu)
+      // Listen to AUTH events
       this.$eventbus.$on('APP.AUTH.LOGIN', this.login)
       this.$eventbus.$on('APP.AUTH.LOGOUT', this.logout)
       this.$eventbus.$on('APP.AUTH.REFRESHTOKEN', this.refreshToken)
 
-      // this.$store.dispatch('MenuStore/GET_MENU_ITEMS').then(()=>{})
-
+      // Set breadcrumb
       if (this.$router.history.current.meta.breadcrumbs) {
         this.breadcrumbs = this.$router.history.current.meta.breadcrumbs
       }
 
+      // Router triggers
       this.$router.afterEach((to, from) => {
         // Breadcrumbs
         this.breadcrumbs = to.meta.breadcrumbs
@@ -256,12 +259,29 @@
         }).catch(error => {
           console.log(error)
         })
+      },
+      loadAdminMenu: function () {
+        // this.$store.dispatch('MenuStore/GET_MENU_ITEMS').then(()=>{})
+        // this.$services.MenuService.getAdminMenu().then(response => {
+        //  // SetLocally
+        //   this.adminMenu = response.data
+        //  // OR Save to Store
+        //   this.$store.commit('MenuStore/SET_MENU_ITEMS', response.data);
+        // }).catch(error => {
+        //   this.$eventbus.$emit('APP.SHOW_TOAST', {
+        //     text: 'Error happened! (.MenuService.getAdminMenu)',
+        //     color: 'red'
+        //   })
+        //   this.loading =  0
+        //   console.log(error)
+        // })
+        this.adminMenu = adminMenu
       }
     }
   }
 </script>
 
-<style>
+<style scoped>
     .fade-enter-active, .fade-leave-active {
         transition: opacity .15s
     }
