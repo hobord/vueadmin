@@ -81,7 +81,7 @@
 
     <v-toolbar app class="indigo darken-4" dark v-if="loggedin">
       <v-toolbar-side-icon @click.native="drawer = !drawer" v-if="!drawer"></v-toolbar-side-icon>
-      <v-toolbar-title  class="white--text">בלש:</v-toolbar-title>
+      <v-toolbar-title  class="white--text">Admin:</v-toolbar-title>
 
       <v-breadcrumbs divider="/" >
         <v-breadcrumbs-item
