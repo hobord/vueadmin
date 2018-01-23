@@ -281,14 +281,14 @@
   }
 </script>
 
-<style scoped>
+<style>
     .fade-enter-active, .fade-leave-active {
         transition: opacity .15s
     }
     .fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
         opacity: 0
     }
-    .list__group__items--no-action .list__tile {
-      padding-left: 16px;
+    .navigation-drawer--mini-variant .list__group__items--no-action .list__tile {
+      padding-left: 16px !important;
     }
 </style>
