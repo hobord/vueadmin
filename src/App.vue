@@ -81,7 +81,21 @@
 
     <v-toolbar app class="indigo darken-4" dark v-if="loggedin">
       <v-toolbar-side-icon @click.native="drawer = !drawer" v-if="!drawer"></v-toolbar-side-icon>
-      <v-toolbar-title  class="white--text">Admin:</v-toolbar-title>
+        <v-avatar class="blue lighten-5">
+          <svg width="100%" height="100%" viewBox="0 0 165 191" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+              <g transform="matrix(1,0,0,1,-626.196,-291.083)">
+                  <g transform="matrix(0.5,0.866025,-0.866025,0.5,688.735,-420.538)">
+                      <path d="M708.564,291.083L790.932,433.749L626.196,433.749L708.564,291.083Z" style="fill:rgb(0,255,19);fill-opacity:0;"/>
+                      <path d="M790.932,433.749L626.196,433.749L708.564,291.083L790.932,433.749ZM700.674,390.749L716.454,390.749L708.564,377.083L700.674,390.749Z" style="fill:rgb(53,72,94);"/>
+                  </g>
+                  <g>
+                      <path d="M708.564,291.083L790.932,433.749L626.196,433.749L708.564,291.083Z" style="fill:rgb(0,255,19);fill-opacity:0;"/>
+                      <path d="M790.932,433.749L626.196,433.749L708.564,291.083L790.932,433.749ZM667.765,409.749L749.363,409.749L708.564,339.083L667.765,409.749Z" style="fill:rgb(84,184,131);"/>
+                  </g>
+              </g>
+          </svg>
+        </v-avatar>
+      <v-toolbar-title class="white--text">Admin:</v-toolbar-title>
 
       <v-breadcrumbs divider="/" >
         <v-breadcrumbs-item

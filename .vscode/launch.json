@@ -8,6 +8,7 @@
           "name": "Launch via NPM",
           "type": "node",
           "request": "launch",
+          "sourceMaps": true,
           "cwd": "${workspaceFolder}",
           "runtimeExecutable": "npm",
           "runtimeArgs": [
@@ -15,6 +16,14 @@
             "dev"
           ],
           "port": 9229
+        },
+        {
+          "type": "chrome",
+          "request": "launch",
+          "sourceMaps": true,
+          "name": "Attach to Chrome",
+          "url": "http://localhost:8080",
+          "webRoot": "${workspaceRoot}"
         }
     ]
 }
